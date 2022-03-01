@@ -19,8 +19,7 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cpr;
+    private String cpr;
     @NotNull
     private String gender;
     @NotNull
@@ -30,15 +29,17 @@ public class Person implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
     private ContactInformation ci;
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Column(name = "birthday")
     private Date birthday;
+    private String email;
 
     // Constructors
     public Person() {
     }
 
-    public Person(int cpr, String gender, String firstName, String lastName, ContactInformation ci) {
+    public Person(String cpr, String gender, String firstName, String lastName, ContactInformation ci) {
         this.cpr = cpr;
         this.gender = gender;
         this.firstName = firstName;
@@ -47,13 +48,11 @@ public class Person implements Serializable {
     }
 
     // Getters and Setters
-    public int getCpr() {
+    public String getCpr() {
         return cpr;
     }
 
-    public void setCpr(int cpr) {
-        this.cpr = cpr;
-    }
+
 
     public String getGender() {
         return gender;
@@ -85,5 +84,13 @@ public class Person implements Serializable {
 
     public void setCi(ContactInformation ci) {
         this.ci = ci;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
