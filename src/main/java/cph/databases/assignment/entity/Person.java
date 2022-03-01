@@ -1,9 +1,11 @@
 package cph.databases.assignment.entity;
 
 import com.sun.istack.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +30,9 @@ public class Person implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
     private ContactInformation ci;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @Column(name = "birthday")
+    private Date birthday;
 
     // Constructors
     public Person() {
