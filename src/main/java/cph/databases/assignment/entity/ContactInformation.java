@@ -11,7 +11,7 @@ public class ContactInformation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     //@JoinColumn(name = "person_id", referencedColumnName = "cpr")
     private Person pcpr;
 
@@ -19,8 +19,8 @@ public class ContactInformation implements Serializable {
 
     private int phone;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "address_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address addr;
 
     // Constructors
@@ -34,11 +34,8 @@ public class ContactInformation implements Serializable {
         this.addr = addr;
     }
 
-    public void setAddress(Address addr){
+    public void setAddress(Address addr) {
         this.addr = addr;
-        if(!addr.getCi().contains(this)) {
-            addr.addContact(this);
-        }
     }
 
     // Getters and setters

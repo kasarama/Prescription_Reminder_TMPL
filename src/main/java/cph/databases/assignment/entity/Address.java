@@ -19,23 +19,8 @@ public class Address implements Serializable {
 
     private int zipcode;
 
-    @OneToMany(mappedBy = "addr", cascade = CascadeType.ALL)
-    private List<ContactInformation> contactList = new ArrayList();
-
     // Constructors
     public Address() {
-    }
-
-    public Address(String street, int zipcode) {
-        this.street = street;
-        this.zipcode = zipcode;
-    }
-
-    public void addContact(ContactInformation ci) {
-        this.contactList.add(ci);
-        if(ci.getAddr() == null){
-            ci.setAddr(this);
-        }
     }
 
     // Getters and setters
@@ -43,31 +28,13 @@ public class Address implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getStreet() {
         return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 
     public int getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
-    }
 
-    public List<ContactInformation> getCi() {
-        return contactList;
-    }
-
-    public void setCi(List<ContactInformation> contactList) {
-        this.contactList = contactList;
-    }
 }
